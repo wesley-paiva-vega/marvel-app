@@ -1,25 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import * as Styled from "./styles/App.styles";
+import { api } from "./api/config";
+import { useEffect, useState } from "react";
 
 function App() {
+  const [characterData, setCharacterData] = useState([]);
+
+  useEffect(() => {
+    api
+      .get("characters", { params: { limit: 100, offset: 100 } })
+      .then((response) => {
+        setCharacterData(response.data.data.results);
+      });
+  }, []);
+
+  console.log(characterData[99]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Styled.Main>
+      <h1>Welcome to Marvel API</h1>
+      <Styled.ContainerCardHero>
+        <Styled.CardHero>Hello</Styled.CardHero>
+      </Styled.ContainerCardHero>
+    </Styled.Main>
   );
 }
 
