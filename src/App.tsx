@@ -2,8 +2,16 @@ import * as Styled from "./styles/App.styles";
 import { api } from "./api/config";
 import { useEffect, useState } from "react";
 
+type HeroProps = {
+  name: string;
+  thumbnail: {
+    extension: string;
+    path: string;
+  };
+};
+
 function App() {
-  const [characterData, setCharacterData] = useState([]);
+  const [characterData, setCharacterData] = useState<HeroProps[]>([]);
 
   useEffect(() => {
     api
@@ -19,7 +27,13 @@ function App() {
     <Styled.Main>
       <h1>Welcome to Marvel API</h1>
       <Styled.ContainerCardHero>
-        <Styled.CardHero>Hello</Styled.CardHero>
+        <Styled.CardHero>
+          <span>{characterData[99]?.name}</span>
+          <img
+            src={`${characterData[99].thumbnail.path}.${characterData[99].thumbnail.extension}`}
+            alt="Image do herói aqui"
+          />
+        </Styled.CardHero>
       </Styled.ContainerCardHero>
     </Styled.Main>
   );
