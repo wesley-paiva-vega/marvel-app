@@ -15,7 +15,7 @@ function App() {
 
   useEffect(() => {
     api
-      .get("characters", { params: { limit: 100, offset: 100 } })
+      .get("characters", { params: { limit: 20, offset: 20 } })
       .then((response) => {
         setCharacterData(response.data.data.results);
       });
@@ -27,13 +27,17 @@ function App() {
     <Styled.Main>
       <h1>Welcome to Marvel API</h1>
       <Styled.ContainerCardHero>
-        <Styled.CardHero>
-          <span>{characterData[99]?.name}</span>
-          <img
-            src={`${characterData[99]?.thumbnail?.path}.${characterData[99]?.thumbnail?.extension}`}
-            alt="Image do herói aqui"
-          />
-        </Styled.CardHero>
+        {characterData.map((item: HeroProps, index) => {
+          return (
+            <Styled.CardHero>
+              <span>{item?.name}</span>
+              <img
+                src={`${item?.thumbnail?.path}.${item?.thumbnail?.extension}`}
+                alt="Image do herói aqui"
+              />
+            </Styled.CardHero>
+          );
+        })}
       </Styled.ContainerCardHero>
     </Styled.Main>
   );
