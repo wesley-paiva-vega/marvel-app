@@ -30,7 +30,7 @@ function App() {
         <Styled.CardHero>
           <span>{characterData[99]?.name}</span>
           <img
-            src={`${characterData[99].thumbnail.path}.${characterData[99].thumbnail.extension}`}
+            src={`${characterData[99]?.thumbnail?.path}.${characterData[99]?.thumbnail?.extension}`}
             alt="Image do herói aqui"
           />
         </Styled.CardHero>
